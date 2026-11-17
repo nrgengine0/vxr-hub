@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>VXR • Gaming Resource Hub & VIP Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter, Orbitron, Noto Sans Myanmar & Noto Sans SC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans Myanmar', 'Noto Sans SC', 'sans-serif'],
+                        display: ['Orbitron', 'Noto Sans Myanmar', 'Noto Sans SC', 'sans-serif'],
+                    },
+                    colors: {
+                        vxr: {
+                            bg: '#07080f',
+                            card: 'rgba(17, 20, 34, 0.72)',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            cyan: '#00f5d4',
+                            purple: '#9b5de5',
+                            pink: '#f15bb5',
+                            gold: '#ffd700'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #07080f;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 245, 212, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 85% 25%, rgba(155, 93, 229, 0.14) 0%, transparent 45%),
+                radial-gradient(circle at 50% 90%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+            color: #f8fafc;
+            -webkit-tap-highlight-color: transparent;
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .safe-header {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .fluid-hero-title {
+            font-size: clamp(1.35rem, 3.2vw + 0.6rem, 2.25rem);
+            line-height: 1.15;
+        }
+
+        .fluid-section-title {
+            font-size: clamp(1rem, 1.4vw + 0.65rem, 1.35rem);
+            line-height: 1.25;
+        }
+
+        .fluid-card-title {
+            font-size: clamp(0.95rem, 1vw + 0.6rem, 1.125rem);
+        }
+
+        .fluid-body-text {
+            font-size: clamp(0.75rem, 0.4vw + 0.68rem, 0.925rem);
+        }
+
+        .touch-target {
+            min-height: 44px;
+        }
+
+        .glass-panel {
+            background: rgba(17, 20, 34, 0.75);
+            backdrop-blur: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(22, 26, 44, 0.85), rgba(13, 16, 28, 0.9));
+            backdrop-blur: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 245, 212, 0.4);
+            box-shadow: 0 8px 30px -8px rgba(0, 245, 212, 0.18), 0 0 15px -3px rgba(155, 93, 229, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .neon-text-gradient {
+            background: linear-gradient(135deg, #00f5d4 0%, #9b5de5 60%, #ffd700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-cyan {
+            background: linear-gradient(135deg, #00f5d4 0%, #00bbf9 100%);
+            color: #05070c;
+            box-shadow: 0 4px 15px rgba(0, 245, 212, 0.28);
+            transition: all 0.2s ease;
+        }
+        .btn-cyan:hover {
+            box-shadow: 0 6px 22px rgba(0, 245, 212, 0.45);
+            transform: translateY(-1px);
+        }
+        .btn-cyan:active {
+            transform: scale(0.97);
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffa500 100%);
+            color: #05070c;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.35);
+            transition: all 0.2s ease;
+        }
+        .btn-gold:hover {
+            box-shadow: 0 6px 22px rgba(255, 215, 0, 0.55);
+            transform: translateY(-1px);
+        }
+        .btn-gold:active {
+            transform: scale(0.97);
+        }
+
+        .tab-active {
+            background: linear-gradient(135deg, rgba(0, 245, 212, 0.16), rgba(255, 215, 0, 0.18));
+            border-color: rgba(255, 215, 0, 0.5);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.12);
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Distinct Key Animation Effects with explicit class triggers */
+        @keyframes successPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.8); border-color: rgba(16, 185, 129, 1); }
+            50% { transform: scale(1.03); box-shadow: 0 0 35px 12px rgba(16, 185, 129, 0.5); border-color: rgba(16, 185, 129, 1); }
+            100% { transform: scale(1); box-shadow: 0 0 15px 3px rgba(16, 185, 129, 0.3); border-color: rgba(16, 185, 129, 0.8); }
+        }
+        .animate-success {
+            animation: successPulse 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+            border-color: #10b981 !important;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+        .animate-error {
+            animation: errorShake 0.4s ease-in-out forwards !important;
+            border-color: #f43f5e !important;
+        }
+
+        @keyframes expiredPulse {
+            0%, 100% { transform: scale(1); opacity: 1; border-color: #f59e0b; }
+            50% { transform: scale(0.97); opacity: 0.8; border-color: #ef4444; }
+        }
+        .animate-expired {
+            animation: expiredPulse 0.6s ease-in-out forwards !important;
+            border-color: #f59e0b !important;
+        }
+
+        .animate-section {
+            animation: fadeSlideUp 0.3s ease-out forwards;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #07080f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e243d;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-vxr-gold selection:text-black">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-white/10 safe-header">
+        <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 min-h-[64px] py-2 flex items-center justify-between gap-2">
+            <!-- Brand Logo -->
+            <button onclick="switchTab('home')" class="flex items-center gap-2.5 sm:gap-3 text-left group focus:outline-none min-w-0">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-vxr-cyan via-vxr-purple to-vxr-gold p-[1.5px] shadow-lg shadow-vxr-gold/20 group-hover:scale-105 transition-transform shrink-0">
+                    <div class="w-full h-full bg-[#0a0c16] rounded-[10px] flex items-center justify-center">
+                        <span class="font-display font-black text-sm sm:text-base tracking-wider neon-text-gradient">VXR</span>
+                    </div>
+                </div>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <span class="font-display font-bold text-sm sm:text-lg tracking-wider text-white truncate">VXR HUB</span>
+                        <span class="px-1.5 sm:px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider rounded-full bg-vxr-gold/15 text-vxr-gold border border-vxr-gold/30 shrink-0">v4.7 VIP</span>
+                    </div>
+                    <p data-i18n="brandSubtitle" class="text-[10px] sm:text-[11px] text-slate-400 truncate">Official Game Files, DNS & VIP Portal</p>
+                </div>
+            </button>
+
+            <!-- Right Controls: VIP Login Portal Button, Language & Status -->
+            <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                <!-- VIP Portal Trigger / Status Button -->
+                <button 
+                    id="vipPortalNavBtn"
+                    onclick="handleVipNavClick()" 
+                    class="touch-target px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs flex items-center gap-1.5 shadow-lg shadow-amber-500/25 transition-all cursor-pointer"
+                >
+                    <i class="fa-solid fa-crown text-black" id="vipNavIcon"></i>
+                    <span id="vipNavText" data-i18n="navVipPortal">VIP Portal</span>
+                </button>
+
+                <!-- Language Switcher Dropdown -->
+                <div class="relative" id="langDropdownContainer">
+                    <button 
+                        onclick="toggleLangMenu()" 
+                        id="langToggleBtn"
+                        aria-label="Select Language"
+                        class="touch-target flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.09] border border-white/10 hover:border-vxr-gold/40 text-xs font-semibold text-slate-200 transition-all cursor-pointer"
+                    >
+                        <i class="fa-solid fa-globe text-vxr-gold"></i>
+                        <span id="currentLangLabel">EN</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-slate-400 transition-transform" id="langChevron"></i>
+                    </button>
+
+                    <!-- Language Menu -->
+                    <div id="langMenu" class="hidden absolute right-0 mt-2 w-44 rounded-2xl glass-panel border border-white/15 shadow-2xl py-1.5 z-50 overflow-hidden">
+                        <button onclick="setLanguage('en')" data-lang-opt="en" class="lang-opt touch-target w-full px-3.5 py-2.5 text-left text-xs font-medium flex items-center justify-between hover:bg-white/10 text-slate-200 transition-colors">
+                            <span class="flex items-center gap-2.5"><span>🇺🇸</span> English</span>
+                            <i class="fa-solid fa-check text-vxr-gold text-[11px] check-icon"></i>
+                        </button>
+                        <button onclick="setLanguage('zh')" data-lang-opt="zh" class="lang-opt touch-target w-full px-3.5 py-2.5 text-left text-xs font-medium flex items-center justify-between hover:bg-white/10 text-slate-200 transition-colors">
+                            <span class="flex items-center gap-2.5"><span>🇨🇳</span> 中文 (Chinese)</span>
+                            <i class="fa-solid fa-check text-vxr-gold text-[11px] check-icon hidden"></i>
+                        </button>
+                        <button onclick="setLanguage('vi')" data-lang-opt="vi" class="lang-opt touch-target w-full px-3.5 py-2.5 text-left text-xs font-medium flex items-center justify-between hover:bg-white/10 text-slate-200 transition-colors">
+                            <span class="flex items-center gap-2.5"><span>🇻🇳</span> Tiếng Việt</span>
+                            <i class="fa-solid fa-check text-vxr-gold text-[11px] check-icon hidden"></i>
+                        </button>
+                        <button onclick="setLanguage('my')" data-lang-opt="my" class="lang-opt touch-target w-full px-3.5 py-2.5 text-left text-xs font-medium flex items-center justify-between hover:bg-white/10 text-slate-200 transition-colors">
+                            <span class="flex items-center gap-2.5"><span>🇲🇲</span> မြန်မာ</span>
+                            <i class="fa-solid fa-check text-vxr-gold text-[11px] check-icon hidden"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Server Status Pill -->
+                <div class="hidden md:flex items-center gap-2 px-3 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/25">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span data-i18n="serverOnline" class="text-xs font-medium text-emerald-300">Server Online</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-3.5 sm:px-6 lg:px-8 py-5 sm:py-8 space-y-5 sm:space-y-6">
+
+        <!-- Prominent Zip File Password & Login Key VIP Banner -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 lg:p-6 border border-amber-400/35 bg-gradient-to-r from-amber-500/[0.08] via-vxr-purple/[0.12] to-sky-500/[0.08] relative overflow-hidden shadow-lg shadow-amber-500/5 animate-section">
+            <div class="absolute -right-8 -top-8 w-36 h-36 bg-amber-400/15 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-start sm:items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-amber-300 text-lg shrink-0 shadow-inner">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <h2 data-i18n="keyBannerTitle" class="font-display font-bold fluid-card-title text-white tracking-wide">
+                                Archive password &amp; Login key
+                            </h2>
+                            <span data-i18n="keyVipBadge" class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                                VIP Access
+                            </span>
+                        </div>
+                        <p data-i18n="keyBannerDesc" class="fluid-body-text text-slate-300 mt-1">
+                            Need the archive password or Login key to activate? Purchase official access directly on Telegram.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2.5 shrink-0">
+                    <button 
+                        onclick="openLoginPortal()"
+                        class="touch-target px-4 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 transition-all"
+                    >
+                        <i class="fa-solid fa-shield-halved text-black"></i>
+                        <span data-i18n="btnEnterKeyModal">Enter VIP Key</span>
+                    </button>
+                    <a 
+                        href="https://t.me/vxr_iosXandroid" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="touch-target px-4 py-3 rounded-xl bg-gradient-to-r from-sky-400 to-blue-600 hover:from-sky-300 hover:to-blue-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-500/25 transition-all"
+                    >
+                        <i class="fa-brands fa-telegram text-base"></i>
+                        <span data-i18n="btnBuyTelegram">Buy on Telegram</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero / Main Menu Banner -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-6 lg:p-7 relative overflow-hidden">
+            <div class="absolute -right-12 -top-12 w-44 h-44 bg-vxr-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-12 -bottom-12 w-44 h-44 bg-vxr-gold/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-vxr-gold mb-1.5">
+                        <i class="fa-solid fa-bolt"></i> <span data-i18n="heroBadge">VXR Resource Portal</span>
+                    </span>
+                    <h1 class="font-display fluid-hero-title font-extrabold text-white tracking-tight">
+                        VXR <span data-i18n="heroTitleAccent" class="neon-text-gradient">MAIN MENU</span>
+                    </h1>
+                    <p data-i18n="heroSubtitle" class="text-slate-300 fluid-body-text mt-1">
+                        Download Android (.pak), iOS (.3105) files, and DNS Profiles easily in one place.
+                    </p>
+                </div>
+
+                <!-- Quick Search Bar -->
+                <div class="w-full lg:w-80 relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        oninput="handleSearch(this.value)"
+                        data-i18n-placeholder="searchPlaceholder"
+                        placeholder="Search PUBG GL, KR, VNG..." 
+                        class="touch-target w-full pl-10 pr-10 py-2.5 rounded-xl bg-[#0a0d18]/90 border border-white/10 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-vxr-gold/60 transition-colors"
+                    >
+                    <button id="clearSearchBtn" onclick="clearSearch()" aria-label="Clear search" class="hidden absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-xmark text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Menu Navigation Tabs -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-5 sm:mt-6">
+                <button onclick="switchTab('home')" id="tab-home" class="tab-btn tab-active touch-target flex items-center justify-center gap-2 py-3 px-2.5 sm:px-4 rounded-xl border border-white/10 bg-white/[0.03] text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+                    <i class="fa-solid fa-grid-2 text-vxr-gold shrink-0"></i>
+                    <span data-i18n="tabAll" class="truncate">All Menu</span>
+                </button>
+                <button onclick="switchTab('android')" id="tab-android" class="tab-btn touch-target flex items-center justify-center gap-2 py-3 px-2.5 sm:px-4 rounded-xl border border-white/10 bg-white/[0.03] text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+                    <i class="fa-brands fa-android text-emerald-400 text-base shrink-0"></i>
+                    <span data-i18n="tabAndroid" class="truncate">Android</span>
+                </button>
+                <button onclick="switchTab('ios')" id="tab-ios" class="tab-btn touch-target flex items-center justify-center gap-2 py-3 px-2.5 sm:px-4 rounded-xl border border-white/10 bg-white/[0.03] text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+                    <i class="fa-brands fa-apple text-slate-200 text-base shrink-0"></i>
+                    <span data-i18n="tabIos" class="truncate">iOS</span>
+                </button>
+                <button onclick="switchTab('dns')" id="tab-dns" class="tab-btn touch-target flex items-center justify-center gap-2 py-3 px-2.5 sm:px-4 rounded-xl border border-white/10 bg-white/[0.03] text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+                    <i class="fa-solid fa-shield-halved text-vxr-purple shrink-0"></i>
+                    <span data-i18n="tabDns" class="truncate">DNS Profile</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Quick Category Overview Cards -->
+        <section id="overview-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-section">
+            <div onclick="switchTab('android')" class="glass-card rounded-2xl p-5 cursor-pointer group relative overflow-hidden">
+                <div class="flex items-start justify-between">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-android"></i>
+                    </div>
+                    <span data-i18n="fiveVersions" class="text-xs font-medium px-2.5 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10">5 Versions</span>
+                </div>
+                <h2 data-i18n="cardAndroidTitle" class="font-display font-bold fluid-card-title text-white mt-4 group-hover:text-vxr-gold transition-colors">Android</h2>
+                <p data-i18n="cardAndroidDesc" class="text-xs text-slate-400 mt-1">PUBG GL, FT, KR, VNG, TW • Download .pak files</p>
+                <div class="mt-4 flex items-center text-xs font-semibold text-vxr-gold">
+                    <span data-i18n="cardAndroidAction">Open Android Files</span>
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <div onclick="switchTab('ios')" class="glass-card rounded-2xl p-5 cursor-pointer group relative overflow-hidden">
+                <div class="flex items-start justify-between">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-300 text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-brands fa-apple"></i>
+                    </div>
+                    <span data-i18n="fiveVersions" class="text-xs font-medium px-2.5 py-1 rounded-full bg-white/5 text-slate-300 border border-white/10">5 Versions</span>
+                </div>
+                <h2 data-i18n="cardIosTitle" class="font-display font-bold fluid-card-title text-white mt-4 group-hover:text-vxr-gold transition-colors">iOS</h2>
+                <p data-i18n="cardIosDesc" class="text-xs text-slate-400 mt-1">PUBG GL, FT, KR, VNG, TW • Download .3105 files</p>
+                <div class="mt-4 flex items-center text-xs font-semibold text-vxr-gold">
+                    <span data-i18n="cardIosAction">Open iOS Files</span>
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+
+            <div onclick="switchTab('dns')" class="glass-card rounded-2xl p-5 cursor-pointer group relative overflow-hidden md:col-span-2 lg:col-span-1">
+                <div class="flex items-start justify-between">
+                    <div class="w-12 h-12 rounded-xl bg-vxr-purple/20 border border-vxr-purple/40 flex items-center justify-center text-vxr-purple text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <span data-i18n="requiredBadge" class="text-xs font-medium px-2.5 py-1 rounded-full bg-vxr-purple/15 text-purple-300 border border-vxr-purple/30">Required</span>
+                </div>
+                <h2 data-i18n="cardDnsTitle" class="font-display font-bold fluid-card-title text-white mt-4 group-hover:text-vxr-purple transition-colors">Install DNS Profile</h2>
+                <p data-i18n="cardDnsDesc" class="text-xs text-slate-400 mt-1">VXR Anti-Blacklist & Low Ping Configuration Profile</p>
+                <div class="mt-4 flex items-center text-xs font-semibold text-purple-300">
+                    <span data-i18n="cardDnsAction">Setup DNS Now</span>
+                    <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: ANDROID (.pak files) -->
+        <section id="section-android" class="space-y-4 animate-section">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-1">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                        <i class="fa-brands fa-android"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h2 data-i18n="secAndroidTitle" class="font-display font-bold fluid-section-title text-white truncate">ANDROID — PAK FILES</h2>
+                        <p data-i18n="secAndroidSub" class="text-xs text-slate-400">Select your game version to download the Android .pak file</p>
+                    </div>
+                </div>
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 shrink-0">
+                    .PAK FORMAT
+                </span>
+            </div>
+
+            <div id="android-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5"></div>
+        </section>
+
+        <!-- SECTION 2: iOS (.3105 files) -->
+        <section id="section-ios" class="space-y-4 animate-section pt-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 px-1">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div class="w-8 h-8 rounded-lg bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-300 shrink-0">
+                        <i class="fa-brands fa-apple"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h2 data-i18n="secIosTitle" class="font-display font-bold fluid-section-title text-white truncate">iOS — .3105 FILES</h2>
+                        <p data-i18n="secIosSub" class="text-xs text-slate-400">Select your game version to download the iOS .3105 file</p>
+                    </div>
+                </div>
+                <span class="text-[11px] sm:text-xs font-semibold px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-300 border border-sky-500/20 shrink-0">
+                    .3105 FILE
+                </span>
+            </div>
+
+            <div id="ios-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5"></div>
+        </section>
+
+        <!-- SECTION 3: INSTALL DNS PROFILE -->
+        <section id="section-dns" class="space-y-4 animate-section pt-2">
+            <div class="flex items-center gap-2.5 px-1">
+                <div class="w-8 h-8 rounded-lg bg-vxr-purple/20 border border-vxr-purple/40 flex items-center justify-center text-vxr-purple shrink-0">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="min-w-0">
+                    <h2 data-i18n="secDnsTitle" class="font-display font-bold fluid-section-title text-white truncate">INSTALL DNS PROFILE</h2>
+                    <p data-i18n="secDnsSub" class="text-xs text-slate-400">VXR Secure DNS Configuration (.mobileconfig)</p>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-4 sm:p-6 lg:p-7 border border-vxr-purple/30 relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-64 h-64 bg-vxr-purple/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
+                    <div class="space-y-2 max-w-2xl">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-vxr-purple/15 border border-vxr-purple/30 text-purple-300 text-xs font-semibold">
+                            <i class="fa-solid fa-lock"></i> <span data-i18n="dnsBadge">VXR Official DNS v1.0</span>
+                        </div>
+                        <h3 data-i18n="dnsCardHeading" class="font-display text-lg sm:text-2xl font-bold text-white">
+                            VXR Protection & Stability DNS
+                        </h3>
+                        <p data-i18n="dnsCardDesc" class="fluid-body-text text-slate-300 leading-relaxed">
+                            Install the VXR DNS Profile to ensure maximum connection stability, reduced ping, and safe usage with all game files.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+                        <button onclick="triggerDownload('dns-profile')" class="btn-gold touch-target w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2.5 cursor-pointer">
+                            <i class="fa-solid fa-download"></i>
+                            <span data-i18n="btnInstallDns">Install DNS Profile</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-6 pt-6 border-t border-white/10">
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-vxr-cyan/15 text-vxr-cyan font-display font-bold text-xs flex items-center justify-center shrink-0 border border-vxr-cyan/30">01</span>
+                        <div>
+                            <h4 data-i18n="step1Title" class="text-sm font-semibold text-white">Download Profile</h4>
+                            <p data-i18n="step1Desc" class="text-xs text-slate-400 mt-0.5">Tap the "Install DNS Profile" button above and select Allow.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-vxr-purple/20 text-purple-300 font-display font-bold text-xs flex items-center justify-center shrink-0 border border-vxr-purple/30">02</span>
+                        <div>
+                            <h4 data-i18n="step2Title" class="text-sm font-semibold text-white">Open Settings</h4>
+                            <p data-i18n="step2Desc" class="text-xs text-slate-400 mt-0.5">Go to device Settings and tap on "Profile Downloaded".</p>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5 flex items-start gap-3">
+                        <span class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-300 font-display font-bold text-xs flex items-center justify-center shrink-0 border border-emerald-500/30">03</span>
+                        <div>
+                            <h4 data-i18n="step3Title" class="text-sm font-semibold text-white">Tap Install</h4>
+                            <p data-i18n="step3Desc" class="text-xs text-slate-400 mt-0.5">Tap "Install" at the top-right corner and enter your passcode.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Empty Search State -->
+        <div id="empty-search" class="hidden glass-panel rounded-2xl p-10 text-center">
+            <i class="fa-solid fa-folder-open text-3xl text-slate-500 mb-3"></i>
+            <h3 data-i18n="emptyTitle" class="font-display font-bold text-white">No Matching Files Found</h3>
+            <p data-i18n="emptySub" class="text-xs text-slate-400 mt-1">Try searching for GL, FT, KR, VNG, or TW.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-6 mt-8 bg-[#05060b]/80">
+        <div class="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+                <span class="font-display font-bold text-white">VXR</span>
+                <span>• Gaming Resource Hub & VIP Portal</span>
+            </div>
+            <p>© 2026 VXR Team. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Download Confirmation Modal -->
+    <div id="downloadModal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-5 bg-black/75 backdrop-blur-sm overflow-y-auto">
+        <div class="glass-panel w-full max-w-md rounded-2xl p-4 sm:p-6 border border-vxr-gold/30 shadow-2xl transform transition-all my-auto max-h-[90dvh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3.5 sm:pb-4 border-b border-white/10 gap-2">
+                <div class="flex items-center gap-2.5 min-w-0">
+                    <div id="modalBadgeIcon" class="w-9 h-9 rounded-xl bg-vxr-gold/15 text-vxr-gold flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-cloud-arrow-down"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <h3 id="modalTitle" class="font-display font-bold text-sm sm:text-base text-white truncate">Preparing Download</h3>
+                        <p id="modalPlatform" class="text-xs text-slate-400 truncate">Android • PAK File</p>
+                    </div>
+                </div>
+                <button onclick="closeModal()" aria-label="Close modal" class="touch-target w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors shrink-0">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="py-4 sm:py-5 space-y-4">
+                <div class="p-3.5 rounded-xl bg-[#090c17] border border-white/10 space-y-2 text-xs">
+                    <div class="flex justify-between gap-2">
+                        <span data-i18n="modalLabelFile" class="text-slate-400 shrink-0">File Name:</span>
+                        <span id="modalFileName" class="font-mono font-semibold text-vxr-gold truncate">VXR_PUBG_GL.pak</span>
+                    </div>
+                    <div class="flex justify-between gap-2">
+                        <span data-i18n="modalLabelVer" class="text-slate-400">Version:</span>
+                        <span id="modalVersion" class="text-white font-medium">4.7.0 (Latest)</span>
+                    </div>
+                    <div class="flex justify-between gap-2">
+                        <span data-i18n="modalLabelSize" class="text-slate-400">File Size:</span>
+                        <span id="modalSize" class="text-white font-medium">14.8 MB</span>
+                    </div>
+                </div>
+
+                <div class="space-y-1.5">
+                    <div class="flex justify-between text-xs gap-2">
+                        <span id="modalStatusText" class="text-slate-300">Generating secure link...</span>
+                        <span id="modalPercent" class="font-mono text-vxr-gold font-semibold shrink-0">0%</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                        <div id="modalProgressBar" class="h-full bg-gradient-to-r from-vxr-gold to-amber-500 w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-amber-500/[0.08] border border-amber-400/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex items-start gap-2.5">
+                        <i class="fa-solid fa-key text-amber-300 text-sm mt-0.5 shrink-0"></i>
+                        <div>
+                            <p data-i18n="modalKeyTitle" class="text-xs font-bold text-amber-200">Archive password &amp; Login key</p>
+                            <p data-i18n="modalKeyDesc" class="text-[11px] text-slate-300 mt-0.5">Get your password &amp; key via official Telegram.</p>
+                        </div>
+                    </div>
+                    <a 
+                        href="https://t.me/vxr_iosXandroid" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="touch-target px-3.5 py-2.5 rounded-lg bg-gradient-to-r from-sky-400 to-blue-600 hover:from-sky-300 hover:to-blue-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-sky-500/20 shrink-0 transition-all"
+                    >
+                        <i class="fa-brands fa-telegram text-sm"></i>
+                        <span data-i18n="btnBuyTelegram">Buy on Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 pt-2">
+                <button onclick="closeModal()" data-i18n="btnClose" class="touch-target flex-1 py-2.5 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-slate-300 transition-colors">
+                    Close
+                </button>
+                <a id="directDownloadAnchor" href="#" target="_blank" onclick="handleDirectClick(event)" class="touch-target flex-1 py-2.5 px-4 rounded-xl btn-gold text-xs font-bold text-center flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-download"></i>
+                    <span data-i18n="btnDirectLink">Direct Link</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Style VIP Login Portal Modal (Shown Immediately on Entry) -->
+    <div id="loginPortalModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#05060b]/95 backdrop-blur-xl">
+        <div id="portalCardBox" class="relative w-full max-w-[420px] bg-[#12141c]/90 border border-white/15 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.8)] backdrop-blur-2xl animate-section overflow-hidden transition-all">
+            
+            <!-- Subtle iOS Top Ambient Glow -->
+            <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-48 h-48 bg-amber-400/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <!-- Header: Apple / iOS Vibe -->
+            <div class="relative z-10 text-center space-y-2 mb-6">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-tr from-amber-400 via-yellow-500 to-amber-200 p-[1.5px] shadow-lg shadow-amber-500/20 flex items-center justify-center">
+                    <div class="w-full h-full bg-[#0d0f17] rounded-[14px] flex items-center justify-center text-amber-400 text-2xl font-bold">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                </div>
+                <h3 class="font-display font-bold text-xl sm:text-2xl text-white tracking-tight">VXR VIP Portal</h3>
+                <p data-i18n="portalInstruction" class="text-xs sm:text-sm text-slate-400">
+                    Enter your licensed access key to unlock features
+                </p>
+            </div>
+
+            <!-- Portal Body Content -->
+            <div class="relative z-10 space-y-4">
+                <!-- Key Input Field (iOS Clean Input Style) -->
+                <div class="relative">
+                    <div class="relative rounded-2xl bg-[#090b12] border border-white/15 focus-within:border-amber-400 transition-colors p-1">
+                        <input 
+                            type="text" 
+                            id="vipKeyInput" 
+                            data-i18n-placeholder="portalPlaceholder"
+                            placeholder="Enter VIP license key..." 
+                            class="touch-target w-full bg-transparent px-3.5 py-3 text-sm font-mono text-white placeholder-slate-500 focus:outline-none text-center sm:text-left"
+                        >
+                    </div>
+                </div>
+
+                <!-- Status Label -->
+                <div id="portalStatus" class="text-xs font-mono text-slate-400 bg-white/[0.03] px-3.5 py-2.5 rounded-xl border border-white/5 text-center">
+                    ◆ Waiting for license key verification
+                </div>
+
+                <!-- Authenticate Button (LOGIN) -->
+                <div class="pt-2">
+                    <button 
+                        onclick="authenticateVipKey()" 
+                        class="touch-target w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black font-display font-extrabold text-sm sm:text-base flex items-center justify-center gap-2 shadow-lg shadow-amber-500/25 transition-all cursor-pointer"
+                    >
+                        <i class="fa-solid fa-right-to-bracket text-xs"></i>
+                        <span data-i18n="btnLogin">LOGIN</span>
+                    </button>
+                </div>
+
+                <!-- Telegram Support Link -->
+                <div class="text-center pt-2">
+                    <a 
+                        href="https://t.me/vxr_iosXandroid" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-2 text-xs font-semibold text-sky-400 hover:text-sky-300 transition-colors py-1"
+                    >
+                        <i class="fa-brands fa-telegram"></i>
+                        <span data-i18n="btnBuyTelegram">Get license key on Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Footer Trust Info -->
+            <div class="relative z-10 mt-6 pt-4 border-t border-white/10 text-center">
+                <p class="text-[10px] font-medium tracking-wider text-slate-500">
+                    SECURE ENCRYPTED GATEWAY • VXR OS v4.7
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIP Session Info Modal (Displays username and remaining time when clicked while logged in) -->
+    <div id="vipSessionModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+        <div class="relative w-full max-w-sm bg-[#12141c] border border-emerald-500/40 rounded-2xl p-6 shadow-2xl animate-section space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                <div class="flex items-center gap-2 text-emerald-400 font-display font-bold text-base">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>VIP Session Active</span>
+                </div>
+                <button onclick="closeVipSessionModal()" class="touch-target w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div class="p-3.5 rounded-xl bg-emerald-500/[0.08] border border-emerald-500/25 space-y-2.5">
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Username / Key:</span>
+                        <span id="sessionUsername" class="font-mono font-bold text-emerald-300">VXR_VIP_USER</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Remaining Time:</span>
+                        <span id="sessionTime" class="font-mono font-bold text-amber-300">29 Days 14 Hours</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Status:</span>
+                        <span class="text-emerald-400 font-semibold">Verified &amp; Unlocked</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <button onclick="closeVipSessionModal()" class="touch-target w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-white transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 left-3.5 right-3.5 sm:left-auto sm:right-5 sm:bottom-5 z-50 hidden items-center gap-3 px-4 py-3 rounded-xl glass-panel border border-vxr-gold/40 shadow-xl text-xs font-medium text-white max-w-md">
+        <i class="fa-solid fa-circle-check text-vxr-gold text-base shrink-0"></i>
+        <span id="toastMessage" class="break-words">Download started!</span>
+    </div>
+
+    <!-- JavaScript MD5 Library & VIP License Verification -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+    <script>
+        // Master License Configuration matching Lua spec
+        const MasterLicenseConfig = {
+            url: 'https://key.zaybot.fun/connect',
+            game: 'PUBG',
+            timeout: 10000,
+            clockSkew: 120,
+            secret: 'Vm8Lk7Uj2JmsjCPVPVjrLa7zgfx3uz9E'
+        };
+
+        // Device Serial Generator (matching Lua serial check)
+        function getDeviceSerial(key) {
+            let serial = localStorage.getItem('vxr_device_serial');
+            if (!serial) {
+                serial = 'VXR_WEB_' + Math.random().toString(36).substring(2, 12) + '_' + Date.now();
+                localStorage.setItem('vxr_device_serial', serial);
+            }
+            return serial;
+        }
+
+        const I18N = {
+            en: {
+                shortLabel: 'EN',
+                brandSubtitle: 'Official Game Files, DNS & VIP Portal',
+                serverOnline: 'Server Online',
+                navVipPortal: 'VIP Portal',
+                btnLogin: 'LOGIN',
+                keyVipBadge: 'VIP Access',
+                keyBannerDesc: 'Need the archive password or Login key to activate? Purchase official access directly on Telegram.',
+                btnBuyTelegram: 'Buy on Telegram',
+                btnEnterKeyModal: 'Enter VIP Key',
+                modalKeyTitle: 'Archive password & Login key',
+                modalKeyDesc: 'Get your password & key via official Telegram.',
+                heroBadge: 'VXR Resource Portal',
+                heroTitleAccent: 'MAIN MENU',
+                heroSubtitle: 'Download Android (.pak), iOS (.3105) files, and DNS Profiles easily in one place.',
+                searchPlaceholder: 'Search PUBG GL, KR, VNG...',
+                tabAll: 'All Menu',
+                tabAndroid: 'Android',
+                tabIos: 'iOS',
+                tabDns: 'DNS Profile',
+                fiveVersions: '5 Versions',
+                requiredBadge: 'Required',
+                cardAndroidTitle: 'Android',
+                cardAndroidDesc: 'PUBG GL, FT, KR, VNG, TW • Download .pak files',
+                cardAndroidAction: 'Open Android Files',
+                cardIosTitle: 'iOS',
+                cardIosDesc: 'PUBG GL, FT, KR, VNG, TW • Download .3105 files',
+                cardIosAction: 'Open iOS Files',
+                cardDnsTitle: 'Install DNS Profile',
+                cardDnsDesc: 'VXR Anti-Blacklist & Low Ping Configuration Profile',
+                cardDnsAction: 'Setup DNS Now',
+                secAndroidTitle: 'ANDROID — PAK FILES',
+                secAndroidSub: 'Select your game version to download the Android .pak file',
+                btnDownloadPak: 'Download pak file',
+                secIosTitle: 'iOS — .3105 FILES',
+                secIosSub: 'Select your game version to download the iOS .3105 file',
+                btnDownload3105: 'Download .3105 file',
+                secDnsTitle: 'INSTALL DNS PROFILE',
+                secDnsSub: 'VXR Secure DNS Configuration (.mobileconfig)',
+                dnsBadge: 'VXR Official DNS v1.0',
+                dnsCardHeading: 'VXR Protection & Stability DNS',
+                dnsCardDesc: 'Install the VXR DNS Profile to ensure maximum connection stability, reduced ping, and safe usage with all game files.',
+                btnInstallDns: 'Install DNS Profile',
+                step1Title: 'Download Profile',
+                step1Desc: 'Tap the "Install DNS Profile" button above and select Allow.',
+                step2Title: 'Open Settings',
+                step2Desc: 'Go to device Settings and tap on "Profile Downloaded".',
+                step3Title: 'Tap Install',
+                step3Desc: 'Tap "Install" at the top-right corner and enter your passcode.',
+                emptyTitle: 'No Matching Files Found',
+                emptySub: 'Try searching for GL, FT, KR, VNG, or TW.',
+                modalLabelFile: 'File Name:',
+                modalLabelVer: 'Version:',
+                modalLabelSize: 'File Size:',
+                btnClose: 'Close',
+                btnDirectLink: 'Direct Link',
+                platformAndroid: 'Android • PAK File',
+                platformIos: 'iOS • .3105 File',
+                platformDns: 'DNS Configuration Profile',
+                statusConnecting: 'Connecting to VXR CDN...',
+                statusVerifying: 'Verifying file integrity...',
+                statusReady: 'Ready! Click Direct Link if download does not start.',
+                toastReady: 'Ready: {file}',
+                toastDownloading: 'Downloading {file}...',
+                toastDemo: 'Demo Link: Replace URL in VXR_RESOURCES for {file}',
+                portalInstruction: 'Enter your licensed access key to unlock features',
+                portalPlaceholder: 'Paste your VIP license key here...',
+                btnAuthenticate: 'LOGIN',
+                portalValidKey: '✓ Key Validated Successfully! Welcome VIP User.',
+                portalInvalidKey: '✕ Invalid Key! Please check your license key or buy on Telegram.',
+                portalExpiredKey: '⚠ License Expired! Your subscription time has ended.',
+                regions: {
+                    gl: 'Global Edition',
+                    ft: 'FT Edition',
+                    kr: 'Korea Edition',
+                    vng: 'Vietnam Edition',
+                    tw: 'Taiwan Edition',
+                    dns: 'iOS & Android DNS Config'
+                }
+            },
+            zh: {
+                shortLabel: '中文',
+                brandSubtitle: '官方游戏文件、DNS 与 VIP 门户',
+                serverOnline: '服务器在线',
+                navVipPortal: 'VIP 门户',
+                btnLogin: '登录',
+                keyVipBadge: 'VIP 专属',
+                keyBannerDesc: '需要解压密码或登录密钥激活吗？请直接通过官方 Telegram 购买获取。',
+                btnBuyTelegram: '在 Telegram 购买',
+                btnEnterKeyModal: '输入 VIP 密钥',
+                modalKeyTitle: '压缩包密码与登录密钥',
+                modalKeyDesc: '通过官方 Telegram 获取密码与密钥。',
+                heroBadge: 'VXR 资源门户',
+                heroTitleAccent: '主菜单',
+                heroSubtitle: '一站式轻松下载 Android (.pak)、iOS (.3105) 文件及 DNS 配置文件。',
+                searchPlaceholder: '搜索 PUBG GL, KR, VNG...',
+                tabAll: '全部菜单',
+                tabAndroid: 'Android 安卓',
+                tabIos: 'iOS 苹果',
+                tabDns: 'DNS 配置',
+                fiveVersions: '5 个版本',
+                requiredBadge: '必需安装',
+                cardAndroidTitle: 'Android 安卓',
+                cardAndroidDesc: 'PUBG GL, FT, KR, VNG, TW • 下载 .pak 文件',
+                cardAndroidAction: '打开 Android 文件',
+                cardIosTitle: 'iOS 苹果',
+                cardIosDesc: 'PUBG GL, FT, KR, VNG, TW • 下载 .3105 文件',
+                cardIosAction: '打开 iOS 文件',
+                cardDnsTitle: '安装 DNS 配置文件',
+                cardDnsDesc: 'VXR 防黑名单与低延迟网络配置文件',
+                cardDnsAction: '立即配置 DNS',
+                secAndroidTitle: 'ANDROID — PAK 文件',
+                secAndroidSub: '选择您的游戏版本以下载 Android .pak 文件',
+                btnDownloadPak: '下载 pak 文件',
+                secIosTitle: 'iOS — .3105 文件',
+                secIosSub: '选择您的游戏版本以下载 iOS .3105 文件',
+                btnDownload3105: '下载 .3105 文件',
+                secDnsTitle: '安装 DNS 配置文件',
+                secDnsSub: 'VXR 安全 DNS 配置 (.mobileconfig)',
+                dnsBadge: 'VXR 官方 DNS v1.0',
+                dnsCardHeading: 'VXR 稳定与安全防护 DNS',
+                dnsCardDesc: '请务必安装 VXR DNS 配置文件，以确保连接稳定、降低延迟并安全使用所有游戏文件。',
+                btnInstallDns: '安装 DNS 配置文件',
+                step1Title: '下载配置文件',
+                step1Desc: '点击上方“安装 DNS 配置文件”按钮并选择“允许”。',
+                step2Title: '打开手机设置',
+                step2Desc: '进入手机“设置”，点击“已下载描述文件”。',
+                step3Title: '点击安装',
+                step3Desc: '点击右上角的“安装”并输入锁屏密码完成安装。',
+                emptyTitle: '未找到匹配的文件',
+                emptySub: '请尝试搜索 GL、FT、KR、VNG 或 TW。',
+                modalLabelFile: '文件名称：',
+                modalLabelVer: '版本：',
+                modalLabelSize: '文件大小：',
+                btnClose: '关闭',
+                btnDirectLink: '直接下载',
+                platformAndroid: 'Android • PAK 文件',
+                platformIos: 'iOS • .3105 文件',
+                platformDns: 'DNS 配置文件',
+                statusConnecting: '正在连接 VXR CDN...',
+                statusVerifying: '正在验证文件完整性...',
+                statusReady: '已就绪！如果未自动下载，请点击“直接下载”。',
+                toastReady: '已就绪：{file}',
+                toastDownloading: '正在下载 {file}...',
+                toastDemo: '演示链接：请在 VXR_RESOURCES 中替换 {file} 的真实链接',
+                portalInstruction: '请输入您的授权密钥以解锁功能',
+                portalPlaceholder: '在此处粘贴您的 VIP 许可密钥...',
+                btnAuthenticate: '登录',
+                portalValidKey: '✓ 密钥验证成功！欢迎尊贵的 VIP 用户。',
+                portalInvalidKey: '✕ 密钥无效！请检查您的许可证密钥或在 Telegram 购买。',
+                portalExpiredKey: '⚠ 许可证已过期！您的订阅时间已结束。',
+                regions: {
+                    gl: '国际版 (Global)',
+                    ft: 'FT 专版 (FT Edition)',
+                    kr: '日韩版 (Korea)',
+                    vng: '越南版 (Vietnam)',
+                    tw: '台湾版 (Taiwan)',
+                    dns: 'iOS 与 Android DNS 配置'
+                }
+            },
+            vi: {
+                shortLabel: 'VI',
+                brandSubtitle: 'Tài Nguyên Game, DNS & Cổng VIP',
+                serverOnline: 'Máy Chủ Trực Tuyến',
+                navVipPortal: 'Cổng VIP',
+                btnLogin: 'ĐĂNG NHẬP',
+                keyVipBadge: 'Truy Cập VIP',
+                keyBannerDesc: 'Cần mật khẩu giải nén hoặc Login key để kích hoạt? Mua trực tiếp qua Telegram chính thức.',
+                btnBuyTelegram: 'Mua trên Telegram',
+                btnEnterKeyModal: 'Nhập Khóa VIP',
+                modalKeyTitle: 'Mật khẩu lưu trữ & Login key',
+                modalKeyDesc: 'Nhận mật khẩu & key kích hoạt qua Telegram chính thức.',
+                heroBadge: 'Cổng Tài Nguyên VXR',
+                heroTitleAccent: 'MENU CHÍNH',
+                heroSubtitle: 'Tải xuống tệp Android (.pak), iOS (.3105) và Cấu hình DNS dễ dàng tại một nơi.',
+                searchPlaceholder: 'Tìm PUBG GL, KR, VNG...',
+                tabAll: 'Tất Cả',
+                tabAndroid: 'Android',
+                tabIos: 'iOS',
+                tabDns: 'Cấu Hình DNS',
+                fiveVersions: '5 Phiên Bản',
+                requiredBadge: 'Bắt Buộc',
+                cardAndroidTitle: 'Android',
+                cardAndroidDesc: 'PUBG GL, FT, KR, VNG, TW • Tải tệp .pak',
+                cardAndroidAction: 'Mở Tệp Android',
+                cardIosTitle: 'iOS',
+                cardIosDesc: 'PUBG GL, FT, KR, VNG, TW • Tải tệp .3105',
+                cardIosAction: 'Mở Tệp iOS',
+                cardDnsTitle: 'Cài Đặt Hồ Sơ DNS',
+                cardDnsDesc: 'Hồ sơ cấu hình VXR giảm ping và ổn định kết nối',
+                cardDnsAction: 'Cài Đặt DNS Ngay',
+                secAndroidTitle: 'ANDROID — TỆP PAK',
+                secAndroidSub: 'Chọn phiên bản game để tải tệp .pak cho Android',
+                btnDownloadPak: 'Tải tệp pak',
+                secIosTitle: 'iOS — TỆP .3105',
+                secIosSub: 'Chọn phiên bản game để tải tệp .3105 cho iOS',
+                btnDownload3105: 'Tải tệp .3105',
+                secDnsTitle: 'CÀI ĐẶT HỒ SƠ DNS',
+                secDnsSub: 'Cấu hình DNS Bảo Mật VXR (.mobileconfig)',
+                dnsBadge: 'VXR DNS Chính Thức v1.0',
+                dnsCardHeading: 'VXR DNS Bảo Vệ & Ổn Định',
+                dnsCardDesc: 'Vui lòng cài đặt Hồ sơ DNS VXR để đảm bảo kết nối ổn định tối đa, giảm ping và sử dụng an toàn với mọi tệp game.',
+                btnInstallDns: 'Cài Đặt Hồ Sơ DNS',
+                step1Title: 'Tải Hồ Sơ Về',
+                step1Desc: 'Nhấn nút "Cài Đặt Hồ Sơ DNS" ở trên và chọn Cho phép.',
+                step2Title: 'Mở Cài Đặt',
+                step2Desc: 'Vào Cài đặt trên thiết bị và nhấn vào "Đã tải về hồ sơ".',
+                step3Title: 'Nhấn Cài Đặt',
+                step3Desc: 'Nhấn "Cài đặt" ở góc trên bên phải và nhập mật mã.',
+                emptyTitle: 'Không Tìm Thấy Tệp Phù Hợp',
+                emptySub: 'Hãy thử tìm kiếm GL, FT, KR, VNG hoặc TW.',
+                modalLabelFile: 'Tên Tệp:',
+                modalLabelVer: 'Phiên Bản:',
+                modalLabelSize: 'Dung Lượng:',
+                btnClose: 'Đóng',
+                btnDirectLink: 'Tải Trực Tiếp',
+                platformAndroid: 'Android • Tệp PAK',
+                platformIos: 'iOS • Tệp .3105',
+                platformDns: 'Hồ Sơ Cấu Hình DNS',
+                statusConnecting: 'Đang kết nối VXR CDN...',
+                statusVerifying: 'Đang kiểm tra tính toàn vẹn...',
+                statusReady: 'Sẵn sàng! Nhấn Tải Trực Tiếp nếu tệp chưa tự tải.',
+                toastReady: 'Sẵn sàng: {file}',
+                toastDownloading: 'Đang tải {file}...',
+                toastDemo: 'Liên kết mẫu: Thay URL trong VXR_RESOURCES cho {file}',
+                portalInstruction: 'Nhập khóa truy cập có bản quyền của bạn để mở khóa tính năng',
+                portalPlaceholder: 'Dán khóa cấp phép VIP của bạn vào đây...',
+                btnAuthenticate: 'ĐĂNG NHẬP',
+                portalValidKey: '✓ Xác thực khóa thành công! Chào mừng bạn đến với VIP.',
+                portalInvalidKey: '✕ Khóa không hợp lệ! Vui lòng kiểm tra lại hoặc mua qua Telegram.',
+                portalExpiredKey: '⚠ Khóa đã hết hạn! Thời gian sử dụng đã kết thúc.',
+                regions: {
+                    gl: 'Bản Quốc Tế (Global)',
+                    ft: 'Phiên Bản FT',
+                    kr: 'Bản Hàn Quốc (Korea)',
+                    vng: 'Bản Việt Nam (VNG)',
+                    tw: 'Bản Đài Loan (Taiwan)',
+                    dns: 'Cấu hình DNS iOS & Android'
+                }
+            },
+            my: {
+                shortLabel: 'မြန်မာ',
+                brandSubtitle: 'တရားဝင် ဂိမ်းဖိုင်များ၊ DNS နှင့် VIP Portal',
+                serverOnline: 'ဆာဗာ အွန်လိုင်း',
+                navVipPortal: 'VIP Portal',
+                btnLogin: 'LOGIN',
+                keyVipBadge: 'VIP ဝယ်ယူရန်',
+                keyBannerDesc: 'Password နှင့် Login Key လိုအပ်ပါက တရားဝင် Telegram တွင် တိုက်ရိုက်ဝယ်ယူနိုင်ပါသည်။',
+                btnBuyTelegram: 'Telegram တွင် ဝယ်ယူရန်',
+                btnEnterKeyModal: 'VIP Key ထည့်ရန်',
+                modalKeyTitle: 'Password နှင့် Login Key',
+                modalKeyDesc: 'Password နှင့် Key ကို တရားဝင် Telegram တွင် ရယူပါ။',
+                heroBadge: 'VXR ဖိုင်စင်တာ',
+                heroTitleAccent: 'ပင်မမီနူး',
+                heroSubtitle: 'Android (.pak)၊ iOS (.3105) ဖိုင်များနှင့် DNS Profile များကို တစ်နေရာတည်းတွင် အလွယ်တကူ ရယူပါ။',
+                searchPlaceholder: 'PUBG GL, KR, VNG ရှာဖွေပါ...',
+                tabAll: 'မီနူးအားလုံး',
+                tabAndroid: 'Android',
+                tabIos: 'iOS',
+                tabDns: 'DNS Profile',
+                fiveVersions: 'ဗားရှင်း ၅ မျိုး',
+                requiredBadge: 'မဖြစ်မနေလိုအပ်',
+                cardAndroidTitle: 'Android',
+                cardAndroidDesc: 'PUBG GL, FT, KR, VNG, TW • .pak ဖိုင်များ ဒေါင်းလုဒ်ဆွဲရန်',
+                cardAndroidAction: 'Android ဖိုင်များကြည့်ရန်',
+                cardIosTitle: 'iOS',
+                cardIosDesc: 'PUBG GL, FT, KR, VNG, TW • .3105 ဖိုင်များ ဒေါင်းလုဒ်ဆွဲရန်',
+                cardIosAction: 'iOS ဖိုင်များကြည့်ရန်',
+                cardDnsTitle: 'Install DNS Profile',
+                cardDnsDesc: 'လိုင်းငြိမ်စေရန်နှင့် Ping ကျစေရန် VXR DNS Profile ထည့်သွင်းပါ',
+                cardDnsAction: 'DNS ယခုထည့်သွင်းရန်',
+                secAndroidTitle: 'ANDROID — PAK ဖိုင်များ',
+                secAndroidSub: 'Android အတွက် ဗားရှင်းအလိုက် .pak ဖိုင်များ ရွေးချယ်ဒေါင်းလုဒ်ဆွဲပါ',
+                btnDownloadPak: 'pak ဖိုင် ဒေါင်းလုဒ်ဆွဲရန်',
+                secIosTitle: 'iOS — .3105 ဖိုင်များ',
+                secIosSub: 'iOS / iPadOS အတွက် ဗားရှင်းအလိုက် .3105 ဖိုင်များ ရယူပါ',
+                btnDownload3105: '.3105 ဖိုင် ဒေါင်းလုဒ်ဆွဲရန်',
+                secDnsTitle: 'INSTALL DNS PROFILE',
+                secDnsSub: 'VXR လုံခြုံရေး DNS ပြင်ဆင်မှု (.mobileconfig)',
+                dnsBadge: 'VXR တရားဝင် DNS v1.0',
+                dnsCardHeading: 'VXR ကာကွယ်ရေးနှင့် လိုင်းငြိမ် DNS',
+                dnsCardDesc: 'ဖိုင်များ အသုံးပြုရာတွင် ပိုမိုတည်ငြိမ်စေရန်နှင့် လိုင်းဆွဲအား ကောင်းမွန်စေရန် VXR DNS Profile ကို မဖြစ်မနေ Install ပြုလုပ်ထားပါ။',
+                btnInstallDns: 'DNS Profile ထည့်သွင်းရန်',
+                step1Title: 'Profile ဒေါင်းလုဒ်ဆွဲပါ',
+                step1Desc: 'အပေါ်ပါ "DNS Profile ထည့်သွင်းရန်" ခလုတ်ကို နှိပ်ပြီး Allow နှိပ်ပါ။',
+                step2Title: 'Settings ဖွင့်ပါ',
+                step2Desc: 'ဖုန်း၏ Settings ထဲသို့ဝင်ပြီး "Profile Downloaded" ကို နှိပ်ပါ။',
+                step3Title: 'Install နှိပ်ပါ',
+                step3Desc: 'ညာဘက်အပေါ်ထောင့်ရှိ "Install" ကို နှိပ်ပြီး Passcode ရိုက်ထည့်ပါ။',
+                emptyTitle: 'ကိုက်ညီသော ဖိုင်မတွေ့ပါ',
+                emptySub: 'GL, FT, KR, VNG သို့မဟုတ် TW ဟု ရိုက်ရှာကြည့်ပါ။',
+                modalLabelFile: 'ဖိုင်အမည်:',
+                modalLabelVer: 'ဗားရှင်း:',
+                modalLabelSize: 'ဖိုင်အရွယ်အစား:',
+                btnClose: 'ပိတ်မည်',
+                btnDirectLink: 'တိုက်ရိုက်ဒေါင်းရန်',
+                platformAndroid: 'Android • PAK ဖိုင်',
+                platformIos: 'iOS • .3105 ဖိုင်',
+                platformDns: 'DNS ပြင်ဆင်မှု Profile',
+                statusConnecting: 'VXR ဆာဗာသို့ ချိတ်ဆက်နေသည်...',
+                statusVerifying: 'ဖိုင်အချက်အလက် စစ်ဆေးနေသည်...',
+                statusReady: 'အဆင်သင့်ဖြစ်ပါပြီ! ဒေါင်းလုဒ်မစပါက တိုက်ရိုက်ဒေါင်းရန် ကိုနှိပ်ပါ။',
+                toastReady: 'အဆင်သင့်ဖြစ်ပြီ: {file}',
+                toastDownloading: '{file} ကို ဒေါင်းလုဒ်ဆွဲနေသည်...',
+                toastDemo: 'နမူနာလင့်ခ်: VXR_RESOURCES ထဲတွင် {file} လင့်ခ်အစစ်ထည့်ပါ',
+                portalInstruction: 'အင်္ဂါရပ်များကို ဖွင့်ရန် သင်၏ လိုင်စင် Key ကို ထည့်သွင်းပါ',
+                portalPlaceholder: 'သင်၏ VIP လိုင်စင် Key ကို ဤနေရာတွင် ကူးထည့်ပါ...',
+                btnAuthenticate: 'LOGIN',
+                portalValidKey: '✓ Key မှန်ကန်ပါသည်! VIP အသုံးပြုသူအတွက် ကြိုဆိုပါတယ်။',
+                portalInvalidKey: '✕ Key မှားယွင်းနေပါသည်! Telegram တွင် ဝယ်ယူရန် သို့မဟုတ် စစ်ဆေးပါ။',
+                portalExpiredKey: '⚠ Key သက်တမ်းကုန်သွားပါပြီ! အချိန်ပြည့်သွားပါပြီ။',
+                regions: {
+                    gl: 'Global ဗားရှင်း',
+                    ft: 'FT ဗားရှင်း',
+                    kr: 'ကိုရီးယား ဗားရှင်း (KR)',
+                    vng: 'ဗီယက်နမ် ဗားရှင်း (VNG)',
+                    tw: 'ထိုင်ဝမ် ဗားရှင်း (TW)',
+                    dns: 'နှင့် Android DNS ပြင်ဆင်မှု'
+                }
+            }
+        };
+
+        const VXR_RESOURCES = {
+            android: [
+                {
+                    id: 'and-gl',
+                    code: 'PUBG GL',
+                    regionKey: 'gl',
+                    fileName: 'VXR_PUBG_GL_v4.7.pak',
+                    size: '15.2 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-cyan-400 to-blue-500',
+                    downloadUrl: 'https://example.com/downloads/android/VXR_PUBG_GL.pak'
+                },
+                {
+                    id: 'and-ft',
+                    code: 'PUBG FT',
+                    regionKey: 'ft',
+                    fileName: 'VXR_PUBG_FT_v4.7.pak',
+                    size: '14.9 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-purple-400 to-pink-500',
+                    downloadUrl: 'https://example.com/downloads/android/VXR_PUBG_FT.pak'
+                },
+                {
+                    id: 'and-kr',
+                    code: 'PUBG KR',
+                    regionKey: 'kr',
+                    fileName: 'VXR_PUBG_KR_v4.7.pak',
+                    size: '15.6 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-emerald-400 to-teal-500',
+                    downloadUrl: 'https://example.com/downloads/android/VXR_PUBG_KR.pak'
+                },
+                {
+                    id: 'and-vng',
+                    code: 'PUBG VNG',
+                    regionKey: 'vng',
+                    fileName: 'VXR_PUBG_VNG_v4.7.pak',
+                    size: '15.1 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-amber-400 to-orange-500',
+                    downloadUrl: 'https://example.com/downloads/android/VXR_PUBG_VNG.pak'
+                },
+                {
+                    id: 'and-tw',
+                    code: 'PUBG TW',
+                    regionKey: 'tw',
+                    fileName: 'VXR_PUBG_TW_v4.7.pak',
+                    size: '14.7 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-indigo-400 to-violet-500',
+                    downloadUrl: 'https://example.com/downloads/android/VXR_PUBG_TW.pak'
+                }
+            ],
+            ios: [
+                {
+                    id: 'ios-gl',
+                    code: 'PUBG GL',
+                    regionKey: 'gl',
+                    fileName: 'VXR_PUBG_GL.3105',
+                    size: '18.4 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-cyan-400 to-blue-500',
+                    downloadUrl: 'https://example.com/downloads/ios/VXR_PUBG_GL.3105'
+                },
+                {
+                    id: 'ios-ft',
+                    code: 'PUBG FT',
+                    regionKey: 'ft',
+                    fileName: 'VXR_PUBG_FT.3105',
+                    size: '18.1 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-purple-400 to-pink-500',
+                    downloadUrl: 'https://example.com/downloads/ios/VXR_PUBG_FT.3105'
+                },
+                {
+                    id: 'ios-kr',
+                    code: 'PUBG KR',
+                    regionKey: 'kr',
+                    fileName: 'VXR_PUBG_KR.3105',
+                    size: '18.9 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-emerald-400 to-teal-500',
+                    downloadUrl: 'https://example.com/downloads/ios/VXR_PUBG_KR.3105'
+                },
+                {
+                    id: 'ios-vng',
+                    code: 'PUBG VNG',
+                    regionKey: 'vng',
+                    fileName: 'VXR_PUBG_VNG.3105',
+                    size: '18.3 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-amber-400 to-orange-500',
+                    downloadUrl: 'https://example.com/downloads/ios/VXR_PUBG_VNG.3105'
+                },
+                {
+                    id: 'ios-tw',
+                    code: 'PUBG TW',
+                    regionKey: 'tw',
+                    fileName: 'VXR_PUBG_TW.3105',
+                    size: '17.9 MB',
+                    version: 'v4.7.0',
+                    tagColor: 'from-indigo-400 to-violet-500',
+                    downloadUrl: 'https://example.com/downloads/ios/VXR_PUBG_TW.3105'
+                }
+            ],
+            dns: {
+                id: 'dns-profile',
+                code: 'VXR DNS Profile',
+                regionKey: 'dns',
+                fileName: 'VXR_Protection_DNS.mobileconfig',
+                size: '12 KB',
+                version: 'v1.0 Official',
+                downloadUrl: 'https://nrg-dns.vercel.app'
+            }
+        };
+
+        let currentLang = localStorage.getItem('vxr_lang') || 'en';
+        let currentTab = 'home';
+        let currentSearch = '';
+        let progressInterval = null;
+        let activeItem = null;
+        let isVipAuthenticated = false;
+        let vipSessionData = { username: '', remaining: '' };
+
+        function t(key) {
+            const pack = I18N[currentLang] || I18N.en;
+            return pack[key] || I18N.en[key] || key;
+        }
+
+        function toggleLangMenu() {
+            const menu = document.getElementById('langMenu');
+            const chevron = document.getElementById('langChevron');
+            const isHidden = menu.classList.contains('hidden');
+            menu.classList.toggle('hidden', !isHidden);
+            chevron.classList.toggle('rotate-180', isHidden);
+        }
+
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('langDropdownContainer');
+            if (container && !container.contains(e.target)) {
+                document.getElementById('langMenu').classList.add('hidden');
+                document.getElementById('langChevron').classList.remove('rotate-180');
+            }
+        });
+
+        function setLanguage(lang) {
+            if (!I18N[lang]) lang = 'en';
+            currentLang = lang;
+            localStorage.setItem('vxr_lang', lang);
+            document.documentElement.lang = lang;
+
+            document.getElementById('currentLangLabel').textContent = t('shortLabel');
+            document.querySelectorAll('.lang-opt').forEach(btn => {
+                const isSelected = btn.getAttribute('data-lang-opt') === lang;
+                btn.classList.toggle('bg-amber-400/10', isSelected);
+                btn.classList.toggle('text-amber-400', isSelected);
+                const icon = btn.querySelector('.check-icon');
+                if (icon) icon.classList.toggle('hidden', !isSelected);
+            });
+
+            document.getElementById('langMenu').classList.add('hidden');
+            document.getElementById('langChevron').classList.remove('rotate-180');
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = t(key);
+            });
+
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                el.placeholder = t(key);
+            });
+
+            renderCards();
+        }
+
+        function renderCards() {
+            const androidContainer = document.getElementById('android-list');
+            const iosContainer = document.getElementById('ios-list');
+            const query = currentSearch.trim().toLowerCase();
+            const regions = (I18N[currentLang] || I18N.en).regions;
+
+            const filteredAndroid = VXR_RESOURCES.android.filter(item => {
+                const regionText = (regions[item.regionKey] || '').toLowerCase();
+                return item.code.toLowerCase().includes(query) ||
+                    regionText.includes(query) ||
+                    'android'.includes(query) ||
+                    'pak'.includes(query);
+            });
+
+            const filteredIos = VXR_RESOURCES.ios.filter(item => {
+                const regionText = (regions[item.regionKey] || '').toLowerCase();
+                return item.code.toLowerCase().includes(query) ||
+                    regionText.includes(query) ||
+                    'ios'.includes(query) ||
+                    '3105'.includes(query);
+            });
+
+            androidContainer.innerHTML = filteredAndroid.map(item => `
+                <div class="glass-card rounded-2xl p-4 flex flex-col justify-between gap-3.5">
+                    <div class="flex items-start justify-between gap-2.5">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${item.tagColor} p-[1px] shrink-0">
+                                <div class="w-full h-full bg-[#0b0e1a] rounded-[11px] flex items-center justify-center font-display font-bold text-xs text-white">
+                                    ${item.code.replace('PUBG ', '')}
+                                </div>
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="font-display font-bold text-sm sm:text-base text-white truncate">${item.code}</h3>
+                                <p class="text-xs text-slate-400 truncate">${regions[item.regionKey] || ''}</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] sm:text-[11px] font-mono text-slate-300 shrink-0">
+                            ${item.version}
+                        </span>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2 text-[11px] text-slate-400 bg-black/25 px-3 py-2 rounded-lg border border-white/5">
+                        <span class="truncate font-mono min-w-0">${item.fileName}</span>
+                        <span class="text-emerald-400 font-semibold shrink-0">${item.size}</span>
+                    </div>
+
+                    <button onclick="triggerDownload('${item.id}')" class="btn-cyan touch-target w-full py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-download shrink-0"></i>
+                        <span class="truncate">${t('btnDownloadPak')}</span>
+                    </button>
+                </div>
+            `).join('');
+
+            iosContainer.innerHTML = filteredIos.map(item => `
+                <div class="glass-card rounded-2xl p-4 flex flex-col justify-between gap-3.5">
+                    <div class="flex items-start justify-between gap-2.5">
+                        <div class="flex items-center gap-2.5 min-w-0">
+                            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br ${item.tagColor} p-[1px] shrink-0">
+                                <div class="w-full h-full bg-[#0b0e1a] rounded-[11px] flex items-center justify-center font-display font-bold text-xs text-white">
+                                    ${item.code.replace('PUBG ', '')}
+                                </div>
+                            </div>
+                            <div class="min-w-0">
+                                <h3 class="font-display font-bold text-sm sm:text-base text-white truncate">${item.code}</h3>
+                                <p class="text-xs text-slate-400 truncate">${regions[item.regionKey] || ''}</p>
+                            </div>
+                        </div>
+                        <span class="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] sm:text-[11px] font-mono text-slate-300 shrink-0">
+                            ${item.version}
+                        </span>
+                    </div>
+
+                    <div class="flex items-center justify-between gap-2 text-[11px] text-slate-400 bg-black/25 px-3 py-2 rounded-lg border border-white/5">
+                        <span class="truncate font-mono min-w-0">${item.fileName}</span>
+                        <span class="text-sky-400 font-semibold shrink-0">${item.size}</span>
+                    </div>
+
+                    <button onclick="triggerDownload('${item.id}')" class="btn-gold touch-target w-full py-2.5 px-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-download shrink-0"></i>
+                        <span class="truncate">${t('btnDownload3105')}</span>
+                    </button>
+                </div>
+            `).join('');
+
+            updateVisibility(filteredAndroid.length, filteredIos.length);
+        }
+
+        function updateVisibility(androidCount, iosCount) {
+            const overview = document.getElementById('overview-cards');
+            const secAndroid = document.getElementById('section-android');
+            const secIos = document.getElementById('section-ios');
+            const secDns = document.getElementById('section-dns');
+            const emptySearch = document.getElementById('empty-search');
+
+            const isSearching = currentSearch.trim().length > 0;
+
+            if (isSearching) {
+                overview.classList.add('hidden');
+                secAndroid.classList.toggle('hidden', androidCount === 0);
+                secIos.classList.toggle('hidden', iosCount === 0);
+                const matchDns = 'dns profile mobileconfig'.includes(currentSearch.trim().toLowerCase());
+                secDns.classList.toggle('hidden', !matchDns);
+
+                const nothingFound = androidCount === 0 && iosCount === 0 && !matchDns;
+                emptySearch.classList.toggle('hidden', !nothingFound);
+                return;
+            }
+
+            emptySearch.classList.add('hidden');
+
+            if (currentTab === 'home') {
+                overview.classList.remove('hidden');
+                secAndroid.classList.remove('hidden');
+                secIos.classList.remove('hidden');
+                secDns.classList.remove('hidden');
+            } else if (currentTab === 'android') {
+                overview.classList.add('hidden');
+                secAndroid.classList.remove('hidden');
+                secIos.classList.add('hidden');
+                secDns.classList.add('hidden');
+            } else if (currentTab === 'ios') {
+                overview.classList.add('hidden');
+                secAndroid.classList.add('hidden');
+                secIos.classList.remove('hidden');
+                secDns.classList.add('hidden');
+            } else if (currentTab === 'dns') {
+                overview.classList.add('hidden');
+                secAndroid.classList.add('hidden');
+                secIos.classList.add('hidden');
+                secDns.classList.remove('hidden');
+            }
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('tab-active'));
+            const activeBtn = document.getElementById(`tab-${tab}`);
+            if (activeBtn) activeBtn.classList.add('tab-active');
+
+            renderCards();
+        }
+
+        function handleSearch(val) {
+            currentSearch = val;
+            document.getElementById('clearSearchBtn').classList.toggle('hidden', val.length === 0);
+            renderCards();
+        }
+
+        function clearSearch() {
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            handleSearch('');
+            input.focus();
+        }
+
+        /* VIP Login Portal — strict browser implementation of the Lua license handshake.
+           Browser device IDs are web-install IDs; they are not the Android phone ID used by Lua. */
+        const VIP_AUTH = {
+            timeoutMs: 10000,
+            clockSkewSeconds: 120,
+            maxKeyLength: 512,
+            pending: false
+        };
+
+        function getWebDeviceId() {
+            let id = localStorage.getItem('vxr_web_device_id');
+            if (!id) {
+                const bytes = new Uint8Array(16);
+                if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(bytes);
+                else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
+                id = Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
+                localStorage.setItem('vxr_web_device_id', id);
+            }
+            return id;
+        }
+
+        // Same name-based UUID construction used by the Lua file, with a browser installation ID.
+        function makeWebSerial(key) {
+            if (typeof window.md5 !== 'function') throw new Error('MD5 library unavailable');
+            const digest = window.md5('THUNDER-LUA-V1\0' + key + '\0' + getWebDeviceId()).toLowerCase();
+            const byte9 = (0x80 + (parseInt(digest.slice(16, 18), 16) % 64)).toString(16);
+            const uuidHex = digest.slice(0, 12) + '3' + digest[12] + digest.slice(14, 16)
+                + byte9 + digest.slice(18);
+            return uuidHex.slice(0, 8) + '-' + uuidHex.slice(8, 12) + '-' + uuidHex.slice(12, 16)
+                + '-' + uuidHex.slice(16, 20) + '-' + uuidHex.slice(20, 32);
+        }
+
+        function setPortalStatus(message, state = 'neutral') {
+            const el = document.getElementById('portalStatus');
+            const styles = {
+                neutral: 'text-xs font-mono text-slate-400 bg-white/[0.03] px-3.5 py-2.5 rounded-xl border border-white/5 text-center',
+                pending: 'text-xs font-mono text-cyan-400 bg-cyan-500/10 px-3.5 py-2.5 rounded-xl border border-cyan-400/30 text-center animate-pulse',
+                success: 'text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3.5 py-2.5 rounded-xl border border-emerald-500/30 text-center',
+                error: 'text-xs font-mono text-rose-400 bg-rose-500/10 px-3.5 py-2.5 rounded-xl border border-rose-500/30 text-center',
+                warning: 'text-xs font-mono text-amber-400 bg-amber-500/10 px-3.5 py-2.5 rounded-xl border border-amber-400/30 text-center'
+            };
+            el.className = styles[state] || styles.neutral;
+            el.textContent = message;
+        }
+
+        function updateVipNavigation(active) {
+            const navBtn = document.getElementById('vipPortalNavBtn');
+            if (active) {
+                navBtn.className = 'touch-target px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/25 transition-all cursor-pointer';
+                document.getElementById('vipNavIcon').className = 'fa-solid fa-circle-check text-white';
+                document.getElementById('vipNavText').textContent = 'VIP Active';
+            } else {
+                navBtn.className = 'touch-target px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-black font-extrabold text-xs flex items-center gap-1.5 shadow-lg shadow-amber-500/25 transition-all cursor-pointer';
+                document.getElementById('vipNavIcon').className = 'fa-solid fa-crown text-black';
+                document.getElementById('vipNavText').textContent = 'VIP Portal';
+            }
+        }
+
+        function openLoginPortal() {
+            if (isVipAuthenticated) {
+                openVipSessionModal();
+                return;
+            }
+            const portal = document.getElementById('loginPortalModal');
+            portal.classList.remove('hidden');
+            portal.classList.add('flex');
+            const box = document.getElementById('portalCardBox');
+            box.classList.remove('animate-success', 'animate-error', 'animate-expired');
+            document.getElementById('vipKeyInput').value = '';
+            setPortalStatus('◆ Waiting for license key verification');
+            document.getElementById('vipKeyInput').focus();
+        }
+
+        function closeLoginPortal() {
+            const portal = document.getElementById('loginPortalModal');
+            portal.classList.add('hidden');
+            portal.classList.remove('flex');
+        }
+
+        function handleVipNavClick() {
+            if (isVipAuthenticated) openVipSessionModal();
+            else openLoginPortal();
+        }
+
+        function openVipSessionModal() {
+            const modal = document.getElementById('vipSessionModal');
+            document.getElementById('sessionUsername').textContent = vipSessionData.username;
+            document.getElementById('sessionTime').textContent = vipSessionData.remaining;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeVipSessionModal() {
+            const modal = document.getElementById('vipSessionModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        async function authenticateVipKey() {
+            if (VIP_AUTH.pending) return;
+            const key = document.getElementById('vipKeyInput').value.trim();
+            const statusDiv = document.getElementById('portalStatus');
+            const portalBox = document.getElementById('portalCardBox');
+            portalBox.classList.remove('animate-success', 'animate-error', 'animate-expired');
+
+            if (!key || key.length > VIP_AUTH.maxKeyLength) {
+                portalBox.classList.add('animate-error');
+                setPortalStatus('◆ Enter a valid license key (1–512 characters).', 'warning');
+                return;
+            }
+            if (typeof window.md5 !== 'function') {
+                setPortalStatus('✕ License verification library could not be loaded.', 'error');
+                return;
+            }
+
+            VIP_AUTH.pending = true;
+            const loginButton = document.querySelector('#loginPortalModal button[onclick="authenticateVipKey()"]');
+            if (loginButton) loginButton.disabled = true;
+            setPortalStatus('◆ Connecting to license server...', 'pending');
+
+            const startedAt = Date.now();
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), VIP_AUTH.timeoutMs);
+
+            try {
+                const serial = makeWebSerial(key);
+                const body = new URLSearchParams({
+                    game: MasterLicenseConfig.game,
+                    user_key: key,
+                    serial
+                });
+
+                const response = await fetch(MasterLicenseConfig.url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: body.toString(),
+                    signal: controller.signal,
+                    cache: 'no-store'
+                });
+
+                if (!response.ok) throw new Error('License server returned HTTP ' + response.status);
+                const raw = await response.text();
+                if (!raw || raw.length > 32768) throw new Error('Invalid server response size');
+
+                let result;
+                try { result = JSON.parse(raw); }
+                catch (_) { throw new Error('Invalid server response format'); }
+
+                const elapsed = Date.now() - startedAt;
+                if (elapsed > VIP_AUTH.timeoutMs) throw new Error('Login request timed out');
+                if (result.status !== true) {
+                    isVipAuthenticated = false;
+                    updateVipNavigation(false);
+                    const reason = String(result.reason || result.message || '');
+                    const expired = /expired/i.test(reason);
+                    portalBox.classList.add(expired ? 'animate-expired' : 'animate-error');
+                    const message = reason || (expired ? t('portalExpiredKey') : t('portalInvalidKey'));
+                    setPortalStatus(message, expired ? 'warning' : 'error');
+                    showToast(message);
+                    return;
+                }
+
+                const data = result.data;
+                if (!data || typeof data.token !== 'string' ||
+                    !/^[a-fA-F0-9]{32}$/.test(data.token) ||
+                    !Number.isSafeInteger(data.rng)) {
+                    throw new Error('Incomplete license server response');
+                }
+
+                const expectedToken = window.md5(
+                    MasterLicenseConfig.game + '-' + key + '-' + serial + '-' + MasterLicenseConfig.secret
+                ).toLowerCase();
+                if (data.token.toLowerCase() !== expectedToken) {
+                    throw new Error('Server token verification failed');
+                }
+
+                const serverNow = Math.floor(data.rng);
+                const localNow = Math.floor(Date.now() / 1000);
+                if (Math.abs(localNow - serverNow) > VIP_AUTH.clockSkewSeconds) {
+                    throw new Error('Device/server clock mismatch. Enable automatic date and time.');
+                }
+
+                // Lua config uses expiryPath=nil and has no resolved manual expiry in this file.
+                // Therefore this browser session is authorized only by the verified server handshake.
+                isVipAuthenticated = true;
+                vipSessionData.username = data.username || data.user || data.name ||
+                    ('VIP_' + key.slice(0, 8).toUpperCase());
+                vipSessionData.remaining = data.remaining || data.time || data.expires || 'Active session';
+
+                portalBox.classList.add('animate-success');
+                setPortalStatus(t('portalValidKey'), 'success');
+                updateVipNavigation(true);
+                showToast(t('portalValidKey'));
+                setTimeout(closeLoginPortal, 900);
+            } catch (err) {
+                // Fail closed: network/CORS errors must never grant access.
+                isVipAuthenticated = false;
+                updateVipNavigation(false);
+                portalBox.classList.add('animate-error');
+                const message = err && err.name === 'AbortError'
+                    ? '✕ License request timed out. Please try again.'
+                    : '✕ ' + (err && err.message ? err.message : 'License verification failed.');
+                setPortalStatus(message, 'error');
+                showToast(message);
+            } finally {
+                clearTimeout(timeoutId);
+                VIP_AUTH.pending = false;
+                if (loginButton) loginButton.disabled = false;
+            }
+        }
+
+        function triggerDownload(itemId) {
+            if (!isVipAuthenticated) { openLoginPortal(); showToast('VIP login required to access downloads.'); return; }
+            let found = null;
+            let platformLabel = '';
+
+            if (itemId === 'dns-profile') {
+                found = VXR_RESOURCES.dns;
+                platformLabel = t('platformDns');
+                window.open(found.downloadUrl, '_blank');
+                return;
+            } else {
+                found = VXR_RESOURCES.android.find(x => x.id === itemId);
+                if (found) {
+                    platformLabel = t('platformAndroid');
+                } else {
+                    found = VXR_RESOURCES.ios.find(x => x.id === itemId);
+                    platformLabel = t('platformIos');
+                }
+            }
+
+            if (!found) return;
+            activeItem = found;
+
+            document.getElementById('modalTitle').textContent = found.code;
+            document.getElementById('modalPlatform').textContent = platformLabel;
+            document.getElementById('modalFileName').textContent = found.fileName;
+            document.getElementById('modalVersion').textContent = found.version;
+            document.getElementById('directDownloadAnchor').href = found.downloadUrl;
+            document.getElementById('modalSize').textContent = found.size;
+
+            const bar = document.getElementById('modalProgressBar');
+            const pct = document.getElementById('modalPercent');
+            const status = document.getElementById('modalStatusText');
+            bar.style.width = '0%';
+            pct.textContent = '0%';
+            status.textContent = t('statusConnecting');
+
+            const modal = document.getElementById('downloadModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            clearInterval(progressInterval);
+            let progress = 0;
+            progressInterval = setInterval(() => {
+                progress += Math.floor(Math.random() * 25) + 15;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(progressInterval);
+                    status.textContent = t('statusReady');
+                    showToast(t('toastReady').replace('{file}', found.fileName));
+                } else {
+                    status.textContent = t('statusVerifying');
+                }
+                bar.style.width = `${progress}%`;
+                pct.textContent = `${progress}%`;
+            }, 220);
+        }
+
+        function handleDirectClick(e) {
+            if (!isVipAuthenticated) { e.preventDefault(); openLoginPortal(); return; }
+            if (activeItem && activeItem.downloadUrl.includes('example.com')) {
+                e.preventDefault();
+                showToast(t('toastDemo').replace('{file}', activeItem.fileName));
+            } else if (activeItem) {
+                showToast(t('toastDownloading').replace('{file}', activeItem.fileName));
+            }
+        }
+
+        function closeModal() {
+            clearInterval(progressInterval);
+            const modal = document.getElementById('downloadModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        let toastTimeout = null;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3500);
+        }
+
+        document.getElementById('downloadModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.getElementById('vipSessionModal').addEventListener('click', function(e) {
+            if (e.target === this) closeVipSessionModal();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+            // Open iOS style login portal immediately on entry as requested
+            openLoginPortal();
+        });
+    </script>
+</body>
+</html>
